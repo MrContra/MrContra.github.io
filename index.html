@@ -1,0 +1,110 @@
+<html>
+
+<script language="javascript" type="text/javascript">
+	var no = 25; // snow number
+	var speed = 50; // smaller number moves the snow faster
+	var snowflake = "snow.gif";
+
+	var ie4up = (document.all) ? 1 : 0;
+	var ns4up = !ie4up;
+	var dx, xp, yp;    // coordinate and position variables
+	var am, stx, sty;  // amplitude and step variables
+	var i, doc_width = 800, doc_height = 600;
+	if (ns4up) {
+	doc_width = self.innerWidth;
+	doc_height = self.innerHeight;
+	} else if (ie4up) {
+	doc_width = document.body.clientWidth;
+	doc_height = document.body.clientHeight;
+	}
+	dx = new Array();
+	xp = new Array();
+	yp = new Array();
+	am = new Array();
+	stx = new Array();
+	sty = new Array();
+	for (i = 0; i < no; ++ i) {
+	dx[i] = 0;                        // set coordinate variables
+	xp[i] = Math.random()*(doc_width-50);  // set position variables
+	yp[i] = Math.random()*doc_height;
+	am[i] = Math.random()*20;         // set amplitude variables
+	stx[i] = 0.02 + Math.random()/10; // set step variables
+	sty[i] = 0.7 + Math.random();     // set step variables
+
+	document.write("<div id=\"dot"+ i +"\" style=\"POSITION: ");
+	document.write("absolute; Z-INDEX: "+ i +"; VISIBILITY: ");
+	document.write("visible; TOP: 15px; LEFT: 15px;\"><img src=\"");
+	document.write(snowflake + "\" border=\"0\"></div>");
+	}
+	function snowNS() {  // Netscape main animation function
+	for (i = 0; i < no; ++ i) {  // iterate for every dot
+	yp[i] += sty[i];
+	if (yp[i] > doc_height-50) {
+	xp[i] = Math.random()*(doc_width-am[i]-30);
+	yp[i] = 0;
+	stx[i] = 0.02 + Math.random()/10;
+	sty[i] = 0.7 + Math.random();
+	doc_width = self.innerWidth;
+	doc_height = self.innerHeight;
+	}
+	dx[i] += stx[i];
+	document.getElementById("dot"+i).style.top = yp[i];
+	document.getElementById("dot"+i).style.left = xp[i] + am[i]*Math.sin(dx[i]);
+	}
+	setTimeout("snowNS()", speed);
+	}
+	function snowIE() {  // IE main animation function
+	for (i = 0; i < no; ++ i) {  // iterate for every dot
+	yp[i] += sty[i];
+	if (yp[i] > doc_height-50) {
+	xp[i] = Math.random()*(doc_width-am[i]-30);
+	yp[i] = 0;
+	stx[i] = 0.02 + Math.random()/10;
+	sty[i] = 0.7 + Math.random();
+	doc_width = document.body.clientWidth;
+	doc_height = document.body.clientHeight;
+	}
+	dx[i] += stx[i];
+	document.all["dot"+i].style.pixelTop = yp[i];
+	document.all["dot"+i].style.pixelLeft = xp[i] + am[i]*Math.sin(dx[i]);
+	}
+	setTimeout("snowIE()", speed);
+	}
+	if (ns4up) {
+	snowNS();
+	} else if (ie4up) {
+	snowIE();
+	}
+</script>
+
+<meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″ />
+
+<head>
+	<title>Página de Alejandro Espinoza</title>
+</head>
+
+<body bgcolor="#D6EAF8" text="black" style="font-family: georgia">
+	<br><br>
+	<hr width="100%">
+	<h1 align="center" style="font-size: 50">INICIO</h1>
+	<hr width="100%">
+	<p align="right">Esta página contiene infromación relacionada a Martin Alejandro Espinoza Magaña.</p>
+	<p align="right">Todos los derechos reservados.</p>
+	<a href="Datos Personales.html" style="font-size: 30">Datos Personales</a>
+	<br><br>
+	<a href="" style="font-size: 30">Hobbies</a>
+	<br><br>
+	<a href="" style="font-size: 30">Easter Egg</a>
+	<br><br>
+
+	<center>
+		<img src="Logo-Practica.png" title="UAS" width="15%" height="30%"></img>
+	</center>
+
+    <br>
+	<div align="right"><audio src="We Are Number One.mp3" preload="auto" controls></audio></div>
+
+</body>
+
+</html>
+
